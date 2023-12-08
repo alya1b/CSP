@@ -206,6 +206,8 @@ bool csp(
                         continue;
                     }
 
+                    std::sort(data.teachers.begin(), data.teachers.end(), teacherSorting);
+
                     for (auto& teacher : data.teachers) {
                         bool isQualified = false;
                         for (const auto& qualCourse : teacher.courses) {
@@ -218,7 +220,7 @@ bool csp(
                         if (!isQualified || teacher.maxHours == 0) {
                             continue;
                         }
-
+                        std::cout<<"Assigning varuable  < "<<group.name<<", "<<teacher.name<<", "<<subject.name<<", hour:"<<hour<<" >"<<std::endl;
                         schedule[group.id][hour] = {subject.name, teacher.name};
                         subject.Hours--;
                         teacher.maxHours--;
@@ -231,6 +233,7 @@ bool csp(
                             }
                         }
 
+                        std::cout<<"Going back..."<<std::endl;
                         schedule[group.id][hour] = {"", ""};
                         subject.Hours++;
                         teacher.maxHours++;
